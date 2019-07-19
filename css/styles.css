@@ -1,0 +1,267 @@
+/* DECLARING CSS VARIABLES(CUSTOM PROPERTIES) */
+:root {
+  --primary-color: rgb(79, 129, 204);
+  --light-color: #f4f4f4;
+  --dark-color: #333;
+  --warning-color: rgb(99, 36, 36);
+}
+
+*,
+*::before,
+*::after {
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+
+  /*SET UP GRID TO DISPLAY ELEMENTS */
+  display: grid;
+
+  /* This is the rows of my grid and they will have four columns with a 
+  height of auto to fit content inside of it after the forward slash I am
+  defining the width of each of my columns*/
+  grid:
+    'header header header header' auto
+    '...... lists  active ......' auto /
+    1fr minmax(100px, 300px) minmax(250px, 500px) 1fr;
+}
+
+.title-heading {
+  grid-area: header;
+  text-align: center;
+
+  /* smallest size is 2rem but it can get bigger */
+  font-size: calc(5vw + 2rem);
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  margin: -0.2em 0 5rem 0.5em;
+}
+
+.all-tasks {
+  grid-area: lists;
+}
+
+.todo-list {
+  /* Create locally scoped custom property (variable) */
+  --spacer: 2rem;
+
+  grid-area: active;
+  background: var(--light-color);
+  color: var(--dark-color);
+}
+
+.todo-header {
+  padding: var(--spacer);
+  background: #e4e4e4;
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.task-count {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.list-title {
+  margin: 0 1em 0 0;
+}
+
+.todo-body {
+  padding: var(--spacer);
+  position: relative;
+}
+
+.task-list {
+  line-height: 1.7;
+  font-size: 1.2rem;
+  list-style: circle;
+  padding-left: 1.1em;
+}
+
+.list-name {
+  cursor: pointer;
+}
+
+.list-name:hover {
+  opacity: 0.7;
+}
+
+.active-list {
+  font-weight: 700;
+}
+
+form {
+  display: flex;
+}
+
+.btn {
+  cursor: pointer;
+  background: 0;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.btn-create {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-right: 0.5em;
+  transition: opacity 0.25s ease-in;
+}
+
+.btn-create:hover {
+  opacity: 0.5;
+}
+
+.new {
+  order: 2;
+  background: transparent;
+  border: 0;
+
+  /* This will inherit the color and font size from the parent container.
+     In this case it is the body */
+  color: inherit;
+  font-size: inherit;
+
+  border-bottom: 1px solid currentColor;
+  outline: none;
+  padding: 0.25em;
+  transition: border-bottom 0.2s ease-in;
+}
+
+.new.list {
+  font-size: 1.2rem;
+}
+
+.new::placeholder {
+  opacity: 0.3;
+}
+
+.new-list-input::placeholder {
+  color: white !important;
+}
+
+.new.task {
+  margin-bottom: 0;
+}
+
+.new:focus {
+  border-bottom-width: 3px;
+}
+
+.new:focus::placeholder {
+  opacity: 0.2;
+}
+
+[type='checkbox'] {
+  /* Doing this will still allow access to check boxes to tab through or toggle
+     Putting display: none; will get rid of the access to the check boxes */
+  opacity: 0;
+
+  /* Takes the checkboxes out of the flow of the document */
+  position: absolute;
+}
+
+.custom-checkbox {
+  --size: 0.75em;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  margin-right: var(--size);
+  cursor: pointer;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: transform 0.25s ease-in-out;
+}
+
+.task label {
+  display: flex-inline;
+  align-items: center;
+  position: relative;
+}
+
+.task {
+  position: relative;
+  margin-bottom: 1.25em;
+}
+
+.task::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -0.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.1;
+}
+
+.task:hover .custom-checkbox,
+[type='checkbox']:focus + label .custom-checkbox {
+  transform: scale(1.2);
+  color: var(--primary-color);
+}
+
+[type='checkbox']:checked + label .custom-checkbox {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  box-shadow: inset 0 0 0px 2px white;
+}
+
+[type='checkbox']:checked + label {
+  opacity: 0.5;
+}
+
+.task label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  left: 1.5em;
+  top: 50%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.15s ease-in;
+}
+
+[type='checkbox']:checked + label::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.new-task-creator .btn-create {
+  color: var(--primary-color);
+}
+
+.delete-stuff {
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -35px;
+  color: var(--light-color);
+}
+
+.btn-delete {
+  opacity: 0.8;
+  font-size: 1rem;
+  transition: all 0.5s ease-in;
+}
+
+.btn-delete:hover {
+  color: var(--warning-color);
+}
