@@ -14,6 +14,9 @@
 
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="css\styles.css" />
+
+    <!-- CUSTOM JAVASCRIPT -->
+    <script defer src="script.js"></script>
   </head>
 
   <body>
@@ -21,15 +24,16 @@
 
     <div class="all-tasks">
       <h2 class="task-list-title">My Lists</h2>
-      <ul class="task-list">
-        <li class="list-name active-list">Youtube</li>
+      <ul class="task-list" data-lists>
+        <!-- <li class="list-name active-list">Youtube</li>
         <li class="list-name">Grocery</li>
-        <li class="list-name">Work</li>
+        <li class="list-name">Work</li> -->
       </ul>
-      <form action="">
+      <form action="" data-new-list-form>
         <input
           type="text"
           class="new list new-list-input"
+          data-new-list-input
           placeholder="new list name"
           aria-label="new list name"
         />
@@ -37,49 +41,43 @@
       </form>
     </div>
 
-    <div class="todo-list">
+    <div class="todo-list" data-list-display-container>
       <!-- LIST HEADER -->
       <div class="todo-header">
-        <h2 class="list-title">Youtube</h2>
-        <p class="task-count">3 tasks remaining</p>
+        <h2 class="list-title" data-list-title>Youtube</h2>
+        <p class="task-count" data-list-count>3 tasks remaining</p>
       </div>
 
       <!-- LIST BODY -->
       <div class="todo-body">
-        <div class="tasks">
+        <div class="tasks" data-tasks>
           <!-- Task 1 -->
-          <div class="task">
-            <input type="checkbox" id="task-1" />
-            <!-- This will make sure if you click on label it will also check the checkbox -->
-            <label for="task-1">
+          <!-- <div class="task">
+             <input type="checkbox" id="task-1" /> -->
+          <!-- This will make sure if you click on label it will also check the checkbox -->
+          <!-- <label for="task-1">
               <span class="custom-checkbox"></span>
               record todo list video
             </label>
-          </div>
+          </div> -->
           <!-- Task 2 -->
-          <div class="task">
-            <input type="checkbox" id="task-2" />
-            <!-- This will make sure if you click on label it will also check the checkbox -->
-            <label for="task-2">
+          <!-- <div class="task">
+            <input type="checkbox" id="task-2" /> -->
+          <!-- This will make sure if you click on label it will also check the checkbox -->
+          <!-- <label for="task-2">
               <span class="custom-checkbox"></span>
               buy groceries
             </label>
-          </div>
+          </div> -->
+
           <!-- Task 3 -->
-          <div class="task">
-            <input type="checkbox" id="task-3" />
-            <!-- This will make sure if you click on label it will also check the checkbox -->
-            <label for="task-3">
-              <span class="custom-checkbox"></span>
-              cut grass
-            </label>
-          </div>
         </div>
 
         <div class="new-task-creator">
-          <form action="">
+          <form action="" data-new-task-form>
             <input
               type="text"
+              data-new-task-input
               class="new task"
               placeholder="new task name"
               aria-label="new task name"
@@ -91,10 +89,24 @@
         </div>
 
         <div class="delete-stuff">
-          <button class="btn btn-delete">Clear completed tasks</button>
-          <button class="btn btn-delete">Delete List</button>
+          <button class="btn btn-delete" data-clear-complete-tasks-button>
+            Clear completed tasks
+          </button>
+          <button class="btn btn-delete" data-delete-list-button>
+            Delete List
+          </button>
         </div>
       </div>
     </div>
+
+    <!-- USE TEMPLATE IN JAVASCRIPT -->
+    <template id="task-template">
+      <div class="task">
+        <input type="checkbox" />
+        <label>
+          <span class="custom-checkbox"></span>
+        </label>
+      </div>
+    </template>
   </body>
 </html>
